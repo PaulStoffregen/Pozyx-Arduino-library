@@ -159,6 +159,9 @@ int PozyxClass::begin(boolean print_result, int mode, int interrupts, int interr
 #elif defined(__AVR_ATmega328P__) || defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
     // Arduino UNO, Mega
     attachInterrupt(interrupt_pin, IRQ, RISING);
+#elif defined(__arm__) && defined(TEENSYDUINO)
+    // Teensy LC & 3.x
+    attachInterrupt(interrupt_pin+2, IRQ, RISING);
 #else
     Serial.println("This is not a board supported by Pozyx, interrupts may not work");
     attachInterrupt(interrupt_pin, IRQ, RISING);
